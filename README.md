@@ -1,10 +1,10 @@
-# Arquitectura React con context escalable y testable
+# Arquitectura React con context escalable y mantenible.
 
 Context nace de la necesidad de tener un estado global en tu aplicación pero a veces un solo un estado global no es la mejor práctica ya que tendrás componentes que pueda acceder a ciertos datos que en realidad no necesitan o que simplemente no deberían de acceder un ejemplo sería tener un componente que pueda acceder a el manejo completo del usuario cuando este solo necesita información genérica de cómo manejar colores en tu aplicación.
 
 Tomando esto en cuenta una buena idea es manejar contextos pequeños que puedan tener su propia lógica haciendo que cada contexto sea pequeño y específico para acciones o vistas de tu aplicación.
 
-Redux propone ciertos patrones con `actions`, `reducers` y `types` además de arquitecturas como `SAGA` aunque funcionan muy bien context no nació para ser tratado como redux ya que con context podemos tener múltiples estados generales dependiendo de la necesidad y podemos aprovechar cosas que nos da react como 
+Redux propone ciertos patrones con `actions`, `reducers` y `types` además de arquitecturas como `SAGA` aunque funcionan muy bien context no nació para ser tratado como redux ya que con context podemos tener múltiples estados generales dependiendo de la necesidad y podemos aprovechar cosas que nos da react.
 
 Este tutorial no está enfocado en saber cómo se usa context sino en buscar una manera de aplicar context en tus aplicaciones  de una forma ordenada que te de la capacidad de poder escalar, testear y mantener tu plataforma de una manera más eficiente.
 
@@ -162,7 +162,7 @@ export {
 ```
 Me enfocaré más en la estructura del archivo más que en explicar la configuración de context.
 Lo primero que necesito que veas es que el contexto se comporta como un componente normal con `useState` y si se necesita podrías llamar `useEffect` sin problemas. Este componente recibe como props un hijo `children` que va a ser un componente hijo, spoiler alert será el perfil.
-Tiene 3 variables definidas que son los posibles estados en los que puede estar un componente y una función `getProfile`  que internamente manda a llamar a la api (es un mock) y dentro de la misma función cuando se manda a llamar dependiendo del momento de ejecución setea una parte del estado por ejemplo cuando se ejecuta la función lo primero que se hace es decir que está en `isFetching`  y cuando acaba este mismo lo cambia a false, así de fácil podemos definir en qué momento necesitamos que este nuestro componente en el tiempo, o si existe un error.
+Tiene 3 variables definidas que son los posibles estados en los que puede estar un componente y una función `getProfile`  que internamente manda a llamar a la API (es un mock) y dentro de la misma función cuando se manda a llamar dependiendo del momento de ejecución setea una parte del estado por ejemplo cuando se ejecuta la función lo primero que se hace es decir que está en `isFetching`  y cuando acaba este mismo lo cambia a false, así de fácil podemos definir en qué momento necesitamos que este nuestro componente en el tiempo, o si existe un error.
 
 Lo último que hace falta es conectar nuestro contexto con `ProfileHoc` y mas que conectar es hacer que el Hoc sea hijo del contexto.
 
@@ -394,7 +394,7 @@ export default App;
 
 
 
-Lo que tiene de especial este último ejemplo es que a diferencia del ejemplo para el perfil que solicitaba la información de la api desde que se cargaba el componente este tiene una funciòn `onLogin` que se ejecuta cuando el usuario da click en el botón y pide como parámetros el email y password llevando toda la lógica en el contexto y decidiendo en qué estado está el componente.
+Lo que tiene de especial este último ejemplo es que a diferencia del ejemplo para el perfil que solicitaba la información de la API desde que se cargaba el componente este tiene una funciòn `onLogin` que se ejecuta cuando el usuario da click en el botón y pide como parámetros el email y password llevando toda la lógica en el contexto y decidiendo en qué estado está el componente.
 
 ![Login gif](img/login.gif)
 
